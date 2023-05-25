@@ -40,19 +40,13 @@ const servers = {
 let init = async()=>{
     client = await AgoraRTM.createInstance(APP_ID)
     await client.login({uid,token})
-
     channel = client.createChannel(roomId)
     await channel.join()
-
     channel.on("MemberJoined",handleUserJoined)
     channel.on("MemberLeft",handleUserLeft)
-
     channel.on('ChannelMessage', handleMessageFromChannel);
-
-
     client.on("MessageFromPeer",handleMessageFromPeer)
-
-    localStream=await navigator.mediaDevices.getUserMedia({video:true,audio:false})
+    localStream=await navigator.mediaDevices.getUserMedia({video:true,audio:true})
     document.getElementById('user1').srcObject = localStream 
 }
 
@@ -130,8 +124,9 @@ let handleUserLeft = (MemberID)=>{
 }
 let handleMessageFromPeer = async (message,MemberID)=>{
     message = JSON.parse(message.text)
-    console.log(MemberID)
     console.log(message);
+    console.log(MemberID,"'s message:")
+    
     console.log("us2",us2)
     console.log("us3",us3)
     if(message.type === 'offer')
@@ -181,6 +176,7 @@ let handleUserJoined = async(MemberID) =>{
     }
     createOffer(MemberID)
     document.getElementById('messages').innerHTML += `<p>${MemberID} join the chat.</p>`
+
     //傳送當前畫布給其他用戶
     var NowCanvas=document.getElementById("drawing-board").toDataURL('image/webp')//當前圖片的URL
     console.log(NowCanvas)
@@ -210,9 +206,7 @@ let handleUserJoined = async(MemberID) =>{
 
 
 let createPeerConnection = async (MemberID)=>{
-    console.log("CPCONNECTION")
-    //console.log(us2)
-    //console.log(MemberID)
+    console.log("CPCONNECTION:",MemberID)
     if (us2==MemberID)
     {
         peerConnection = new RTCPeerConnection(servers)
@@ -222,8 +216,8 @@ let createPeerConnection = async (MemberID)=>{
         document.getElementById("user2").style.display='block'
         document.getElementById('d2').innerHTML=us2
         if(!localStream){
-            localStream=await navigator.mediaDevices.getUserMedia({video:true,audio:false})
-            document.getElementById('user1').srcObject = localStream 
+            localStream=await navigator.mediaDevices.getUserMedia({video:true,audio:true})
+            document.getElementById('user1').srcObject = localStream
         }
         localStream.getTracks().forEach((track)=>{
             peerConnection.addTrack(track,localStream)
@@ -248,7 +242,7 @@ let createPeerConnection = async (MemberID)=>{
         document.getElementById("user3").style.display='block'
         document.getElementById('d3').innerHTML=us3
         if(!localStream){
-            localStream=await navigator.mediaDevices.getUserMedia({video:true,audio:false})
+            localStream=await navigator.mediaDevices.getUserMedia({video:true,audio:true})
             document.getElementById('user1').srcObject = localStream 
         }
         localStream.getTracks().forEach((track)=>{
@@ -354,6 +348,8 @@ let sendMessage = async() => {
 };
 
 
+
+//================================================================================================
 
 function setDrawingMode(mode){
     drawmode = mode;
