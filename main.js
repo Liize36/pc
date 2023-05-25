@@ -222,7 +222,7 @@ let createPeerConnection = async (MemberID)=>{
         document.getElementById("user2").style.display='block'
         document.getElementById('d2').innerHTML=us2
         if(!localStream){
-            localStream=await navigator.mediaDevices.getUserMedia({video:true,audio:true})
+            localStream=await navigator.mediaDevices.getUserMedia({video:true,audio:false})
             document.getElementById('user1').srcObject = localStream 
         }
         localStream.getTracks().forEach((track)=>{
@@ -248,7 +248,7 @@ let createPeerConnection = async (MemberID)=>{
         document.getElementById("user3").style.display='block'
         document.getElementById('d3').innerHTML=us3
         if(!localStream){
-            localStream=await navigator.mediaDevices.getUserMedia({video:true,audio:true})
+            localStream=await navigator.mediaDevices.getUserMedia({video:true,audio:false})
             document.getElementById('user1').srcObject = localStream 
         }
         localStream.getTracks().forEach((track)=>{
