@@ -6,26 +6,28 @@
         <title>Peerchat</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" media="screen" href="lobby.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="styles.css">
     </head>
     <body>
-        <form id="join-form">
-            <b>房間代碼</b>
-            <input type="text" name="invite_link" required/>
-            <b>使用者名稱</b>
-            <input type="ID" name="uid" required/>
-            <input type="submit" value="JoinRoom" />
-        </form>
-        
-    </body>
-    <script>
-        let form = document.getElementById("join-form")
+        <div class="cover">
+            <h1>歡迎來到 Peerchat</h1>
+            <p>請輸入您的房間代碼和使用者名稱以開始視訊會議</p>
+            <form id="join-form">
+                <input type="text" name="invite_link" placeholder="房間代碼" class="input-box" required/>
+                <input type="text" name="uid" placeholder="使用者名稱" class="input-box" required/>
+                <input type="submit" value="加入房間" class="submit-btn" />
+            </form>
+            <p class="footer">© 2023 Peerchat. 版權所有.</p>
+        </div>
+        <script>
+            let form = document.getElementById("join-form")
 
-        form.addEventListener("submit",(e)=>{
-            e.preventDefault()
-            localStorage.setItem('Uid', e.target.uid.value);
-            let inviteCode = e.target.invite_link.value
-            window.location = `index.html?room=${inviteCode}`
-        })
-    </script>
+            form.addEventListener("submit",(e)=>{
+                e.preventDefault()
+                localStorage.setItem('Uid', e.target.uid.value);
+                let inviteCode = e.target.invite_link.value
+                window.location = `index.html?room=${inviteCode}`
+            })
+        </script>
+    </body>
 </html>
