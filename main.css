@@ -4,12 +4,16 @@
 
 #pencilButton {
     background-image: url("pencil.jpg");
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 #eraserButton {
     background-image: url("eraser.jpg");
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 #pencilButton, #eraserButton {
