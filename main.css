@@ -4,10 +4,12 @@
 
 #pencilButton {
     background-image: url("pencil.jpg");
+    background-size: cover;
 }
 
 #eraserButton {
     background-image: url("eraser.jpg");
+    background-size: cover;
 }
 
 .brush-size-slider {
