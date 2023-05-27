@@ -2,11 +2,11 @@
     margin-right: 15px;
 }
 
-.pencilButton {
+#pencilButton {
     background-image: url("pencil.jpg");
 }
 
-.eraserButton {
+#eraserButton {
     background-image: url("eraser.jpg");
 }
 
