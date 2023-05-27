@@ -2,23 +2,31 @@
     margin-right: 15px;
 }
 
-#pencilButton {
-    background-image: url("pencil.jpg");
+#pencilButton, #eraserButton {
+    width: 50px;
+    height: 50px;
+    border: none;
+    color: transparent;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    transition: background-color 0.3s ease;
+}
+
+#pencilButton {
+    background-image: url("pencil.jpg");
+}
+
+#pencilButton:hover {
+    background-color: #f0f0f0;
 }
 
 #eraserButton {
     background-image: url("eraser.jpg");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
 }
 
-#pencilButton, #eraserButton {
-    border: none;
-    color: transparent;
+#eraserButton:hover {
+    background-color: #f0f0f0;
 }
 
 .brush-size-slider {
