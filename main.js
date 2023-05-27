@@ -28,13 +28,7 @@ let channel;
 
 var drawmode="pencil";
 var remotedrawmode="pencil";
-// const servers = {
-//     iceServers:[
-//         {
-//             urls:['stun:stun1.l.google.com:19302', 'stun:stun2.l.google.com:19302']
-//         }
-//     ]
-// }
+
 const servers = {
     iceServers: [
         {
@@ -62,7 +56,7 @@ var recoverer=null;
 var haveRecoverer=false;
 let handleMessageFromChannel = async (message, senderId) => {
     message = JSON.parse(message.text);
-    console.log(message); // You can see the full content of the message here
+    console.log(message); 
     if (message.type === 'text') {
         let messageBox = document.getElementById('messages');
         let newMessage = document.createElement('p');
@@ -79,8 +73,8 @@ let handleMessageFromChannel = async (message, senderId) => {
 
     else if (message.type === 'clear') {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#ffffff';  // 设置填充颜色为白色
-        ctx.fillRect(0, 0, canvas.width, canvas.height);  // 绘制一个和画布一样大的矩形
+        ctx.fillStyle = '#ffffff';  
+        ctx.fillRect(0, 0, canvas.width, canvas.height);  
         drawingActions = []; 
     }
     else if (message.type === 'recover'){
@@ -104,8 +98,8 @@ let handleMessageFromChannel = async (message, senderId) => {
                     img.onload = function() {
                         var canvas = document.getElementById("drawing-board");
                         var context = canvas.getContext('2d');
-                        context.clearRect(0, 0, canvas.width, canvas.height); // 清除畫布
-                        context.drawImage(img, 0, 0); // 繪製圖像
+                        context.clearRect(0, 0, canvas.width, canvas.height);
+                        context.drawImage(img, 0, 0); 
                     };
                     recoverCanvas=true;
                 }
@@ -183,17 +177,17 @@ let handleUserJoined = async(MemberID) =>{
     createOffer(MemberID)
     document.getElementById('messages').innerHTML += `<p>${MemberID} join the chat.</p>`
 
-    //傳送當前畫布給其他用戶
+    
     var NowCanvas=document.getElementById("drawing-board").toDataURL('image/webp')//當前圖片的URL
     console.log(NowCanvas)
     console.log(NowCanvas.length)
-    let chunkSize = 14000;  // 每段的長度
+    let chunkSize = 14000;  
     let chunks = [];
     for (let i = 0; i < NowCanvas.length; i += chunkSize) {
         chunks.push(NowCanvas.substring(i, i + chunkSize));
     }
 
-    //chunks包含分段的URL
+    
     for(let i = 0; i<chunks.length;i++)
     {
         if(i==chunks.length-1)
@@ -205,7 +199,7 @@ let handleUserJoined = async(MemberID) =>{
             sender: uid,  
             })
         };
-        console.log(messageObject.text);  // to check what you are sending
+        console.log(messageObject.text);  
         await channel.sendMessage(messageObject);
     }
 }
@@ -348,7 +342,7 @@ let sendMessage = async() => {
             sender: uid,  
         })
     };
-    console.log(messageObject.text);  // to check what you are sending
+    console.log(messageObject.text);  
     await channel.sendMessage(messageObject);
 };
 
@@ -362,11 +356,11 @@ function setDrawingMode(mode){
 }
 
 
-var drawingActions = []; // 儲存所有動作
+var drawingActions = []; 
 var canvas = document.getElementById("drawing-board");
 var ctx = canvas.getContext("2d");
-ctx.fillStyle = '#ffffff';  // 设置填充颜色为白色
-ctx.fillRect(0, 0, canvas.width, canvas.height);  // 绘制一个和画布一样大的矩形
+ctx.fillStyle = '#ffffff';  
+ctx.fillRect(0, 0, canvas.width, canvas.height);  
 var isDrawing = false;
 var currentColor = "black";
 
@@ -389,7 +383,6 @@ brushSizeInput.addEventListener("input", function() {
 });
 
 
-// 當有畫筆動作時，將動作細節加入列表
 function addDrawingAction(type, color, lineWidth, points) {
     let newAction = {
         type: type,
@@ -445,7 +438,6 @@ canvas.onmousemove = function(event) {
 
         currentAction.points.push(point);
         NowMousePoint=point;
-        // 繪製新加入的點
         ctx.lineJoin = "round";
         ctx.lineCap = "round";
         ctx.beginPath();
@@ -495,7 +487,6 @@ canvas.onmouseleave = function(event) {
 
 
 function replayActions() {
-    //ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     for (var i = 0; i < drawingActions.length; i++) {
         var action = drawingActions[i];
@@ -516,7 +507,7 @@ function replayActions() {
     drawingActions=[]
 }
 
-//每1/8秒檢查一次流量
+
 setInterval(function(event) { 
     if(currentAction.points.length>1){
         addDrawingAction(currentAction.type, currentAction.color, currentAction.lineWidth, currentAction.points);
@@ -534,9 +525,9 @@ var clearButton = document.getElementById("clear-canvas");
 
 clearButton.onclick = function() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = '#ffffff';  // 设置填充颜色为白色
-    ctx.fillRect(0, 0, canvas.width, canvas.height);  // 绘制一个和画布一样大的矩形
-    drawingActions = []; // 清除所有繪畫動作
+    ctx.fillStyle = '#ffffff';  
+    ctx.fillRect(0, 0, canvas.width, canvas.height);  
+    drawingActions = []; 
 
     let messageObject = {
         text: JSON.stringify({
