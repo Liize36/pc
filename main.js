@@ -112,13 +112,11 @@ let handleUserLeft = (MemberID)=>{
     {
         document.getElementById('user2').style.display='none';
         us2=null;
-        document.getElementById('d2').innerHTML=us2
     }   
     else if(MemberID==us3)
     {
         document.getElementById('user3').style.display='none';
         us3=null;
-        document.getElementById('d3').innerHTML=us3
     }
     document.getElementById('messages').innerHTML += `<p>${MemberID} leave the chat.</p>`
 }
@@ -214,7 +212,6 @@ let createPeerConnection = async (MemberID)=>{
         console.log("NEW CONNECTION US2:",us2)       
         document.getElementById("user2").srcObject = remoteStream
         document.getElementById("user2").style.display='block'
-        document.getElementById('d2').innerHTML=us2
         if(!localStream){
             localStream=await navigator.mediaDevices.getUserMedia({video:true,audio:true})
             document.getElementById('user1').srcObject = localStream
@@ -240,7 +237,6 @@ let createPeerConnection = async (MemberID)=>{
         console.log("NEW CONNECTION US3:",us3)
         document.getElementById("user3").srcObject = remoteStream3
         document.getElementById("user3").style.display='block'
-        document.getElementById('d3').innerHTML=us3
         if(!localStream){
             localStream=await navigator.mediaDevices.getUserMedia({video:true,audio:true})
             document.getElementById('user1').srcObject = localStream 
