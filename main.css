@@ -11,23 +11,18 @@
     background-repeat: no-repeat;
     background-position: center;
     transition: background-color 0.3s ease;
+    cursor: pointer;
 }
 
 #pencilButton {
     background-image: url("pencil.jpg");
 }
 
-#pencilButton:hover {
-    background-color: #f0f0f0;
-}
 
 #eraserButton {
     background-image: url("eraser.jpg");
 }
 
-#eraserButton:hover {
-    background-color: #f0f0f0;
-}
 
 .brush-size-slider {
     width: 200px; 
