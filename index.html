@@ -29,7 +29,7 @@
                 </div>
                 <div id="chat">
                     <div id="messages"></div>
-                    <input id="input" type="text" />
+                    <input id="input" type="text" onkeydown="if (event.keyCode == 13) { sendMessage(); }" />
                     <button id="send" onclick="sendMessage()">Send</button>     
                 </div>
             </div>
