@@ -142,6 +142,7 @@ let handleMessageFromPeer = async (message,MemberID)=>{
     }
     if(message.type ==='answer')
     {
+        console.log("Get answer")
         console.log(message.answer)
         addAnswer(message.answer,MemberID)
     }
@@ -264,7 +265,7 @@ let createPeerConnection = async (MemberID)=>{
 }
 
 let createOffer = async(MemberID) =>{
-    //console.log("COFFER")
+    console.log("CreateOFFER")
     let offer
     await createPeerConnection(MemberID)
 
@@ -282,7 +283,7 @@ let createOffer = async(MemberID) =>{
 }
 
 let createAnswer = async(MemberID,offer) =>{
-    //console.log("CAnswer")
+    console.log("CreateAnswer")
     let answer
     await createPeerConnection(MemberID)
     if(us2 == MemberID)
@@ -303,6 +304,7 @@ let createAnswer = async(MemberID,offer) =>{
 
 
 let addAnswer = async(answer,MemberID)=>{
+    console.log("AddAnswer")
     console.log(us2)
     console.log(us3)
     console.log(MemberID)
